@@ -1,0 +1,84 @@
+@model IEnumerable<Ecommerce.Models.TblProduct>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container mt-4">
+    <div class="row mb-5">
+        <!-- Main Full Width Banner -->
+        <div class="col-12">
+            <div class="position-relative overflow-hidden rounded-4 shadow-sm main-banner" style="background: url('/images/banners/main-banner.jpg') center/cover #f4f4f4; min-height: 500px;">
+                <div class="position-absolute top-50 start-0 translate-middle-y ps-md-5 ps-4">
+                    <a asp-action="Shop" class="btn btn-primary btn-lg rounded-pill px-5 py-3" style="background-color: var(--primary-color); border: none;">Shop Now <i class="bi bi-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Service Highlights -->
+<div class="bg-white border-bottom py-5 my-5">
+    <div class="container">
+        <div class="row text-center g-4">
+            <div class="col-md-3">
+                <i class="bi bi-truck fs-1 text-primary mb-3"></i>
+                <h6 class="fw-bold mb-1">Free Shipping</h6>
+                <p class="text-muted small mb-0">Orders over $50</p>
+            </div>
+            <div class="col-md-3">
+                <i class="bi bi-arrow-repeat fs-1 text-primary mb-3"></i>
+                <h6 class="fw-bold mb-1">Free Returns</h6>
+                <p class="text-muted small mb-0">Within 30 days</p>
+            </div>
+            <div class="col-md-3">
+                <i class="bi bi-info-circle fs-1 text-primary mb-3"></i>
+                <h6 class="fw-bold mb-1">Get 20% Off 1 Item</h6>
+                <p class="text-muted small mb-0">When you sign up</p>
+            </div>
+            <div class="col-md-3">
+                <i class="bi bi-life-preserver fs-1 text-primary mb-3"></i>
+                <h6 class="fw-bold mb-1">We Support</h6>
+                <p class="text-muted small mb-0">24/7 amazing services</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h2 class="fw-bold text-dark mb-1">Our Products</h2>
+            <p class="text-muted">Top picks for you</p>
+        </div>
+        <a asp-action="Shop" class="text-decoration-none text-muted fw-bold">VIEW MORE PRODUCTS <i class="bi bi-arrow-right"></i></a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card h-100 border-0 product-card-v2 p-3">
+                    <div class="position-relative overflow-hidden rounded-3 mb-3" style="background: #f9f9f9;">
+                        <img src="~/product_image/@item.Prod_image" class="card-img-top" alt="@item.Prod_name" style="height: 250px; object-fit: contain; transition: 0.5s;">
+                        <div class="product-action-vertical">
+                            <a href="#" class="btn-product-icon"><i class="bi bi-heart"></i></a>
+                        </div>
+                        <div class="product-action">
+                            <form asp-controller="Cart" asp-action="AddToCart" method="post" class="w-100 px-3">
+                                <input type="hidden" name="prodId" value="@item.Prod_id" />
+                                <button type="submit" class="btn btn-dark w-100 rounded-0 py-2"><i class="bi bi-cart-plus me-2"></i>ADD TO CART</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-body p-0 text-center">
+                        <p class="text-muted small mb-1 text-uppercase">@item.Category?.Category_name</p>
+                        <h6 class="fw-bold text-dark mb-2"><a asp-action="ProductDetails" asp-route-id="@item.Prod_id" class="text-decoration-none text-dark">@item.Prod_name</a></h6>
+                        <p class="text-primary fw-bold mb-0">$@item.Prod_price</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+</style>

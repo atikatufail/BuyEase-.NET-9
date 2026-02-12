@@ -1,0 +1,84 @@
+@model Ecommerce.Models.TblProduct
+
+@{
+    ViewData["Title"] = Model.Prod_name;
+}
+
+<div class="container my-5 py-5">
+    <div class="container my-5 py-5">
+    <nav aria-label="breadcrumb" class="mb-5">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a asp-action="Index" class="text-decoration-none text-muted small uppercase fw-bold">Home</a></li>
+            <li class="breadcrumb-item"><a asp-action="Shop" class="text-decoration-none text-muted small uppercase fw-bold">Shop</a></li>
+            <li class="breadcrumb-item active small uppercase fw-bold text-brown" aria-current="page">@Model.Prod_name</li>
+        </ol>
+    </nav>
+
+    <div class="row g-5">
+        <!-- Product Image -->
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm p-5 rounded-4 bg-white text-center">
+                <img src="~/product_image/@Model.Prod_image" class="img-fluid" alt="@Model.Prod_name" style="max-height: 500px; object-fit: contain; width: 100%;">
+            </div>
+        </div>
+
+        <!-- Product Specs -->
+        <div class="col-md-6">
+            <div class="ps-md-4">
+                <span class="badge bg-brown-soft text-brown px-3 py-2 rounded-pill mb-3 text-uppercase small ls-1 fw-bold">@Model.Category?.Category_name</span>
+                <h1 class="display-5 fw-bold mb-3 text-dark">@Model.Prod_name</h1>
+                <h3 class="text-brown fw-bold mb-4 display-6">$@Model.Prod_price</h3>
+                
+                <p class="lead text-muted mb-5 lh-lg">
+                    Experience the perfect blend of quality and design with our @Model.Prod_name. 
+                    This premium piece is carefully curated for the BuyEase @Model.Category?.Category_name collection, ensuring you receive only the finest quality.
+                </p>
+
+                <div class="d-grid gap-3 d-sm-flex mb-5">
+                    <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                        <input type="hidden" name="prodId" value="@Model.Prod_id" />
+                        <button type="submit" class="btn btn-brown btn-xl px-5 py-3 rounded-pill shadow-sm fw-bold">
+                            <i class="bi bi-cart-plus me-2"></i> Add to Cart
+                        </button>
+                    </form>
+                    <button type="button" class="btn btn-outline-brown btn-xl px-5 py-3 rounded-pill fw-bold">
+                        <i class="bi bi-heart me-2"></i> Wishlist
+                    </button>
+                </div>
+
+                <hr class="my-5 opacity-10">
+
+                <div class="d-flex align-items-center mb-3">
+                    <div class="flex-shrink-0 bg-brown-soft p-3 rounded-circle">
+                        <i class="bi bi-truck fs-4 text-brown"></i>
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h6 class="mb-0 fw-bold">Fast & Free Shipping</h6>
+                        <small class="text-muted">On all BuyEase orders over $100</small>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0 bg-brown-soft p-3 rounded-circle">
+                        <i class="bi bi-shield-check fs-4 text-brown"></i>
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h6 class="mb-0 fw-bold">Secure Checkout</h6>
+                        <small class="text-muted">Safe and encrypted payments</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-brown { color: #8b4513 !important; }
+    .bg-brown-soft { background-color: rgba(139, 69, 19, 0.08); }
+    .btn-brown { background-color: #8b4513; color: white; border: none; transition: 0.3s; }
+    .btn-brown:hover { background-color: #70360f; color: white; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(139, 69, 19, 0.2); }
+    .btn-outline-brown { color: #8b4513; border: 2px solid #8b4513; transition: 0.3s; }
+    .btn-outline-brown:hover { background-color: #8b4513; color: white; transform: translateY(-3px); }
+    .uppercase { text-transform: uppercase; }
+    .ls-1 { letter-spacing: 1px; }
+    .btn-xl { font-size: 1.1rem; }
+</style>

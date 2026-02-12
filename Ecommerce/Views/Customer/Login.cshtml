@@ -1,0 +1,56 @@
+@model Ecommerce.Models.TblCustomer
+@{
+    ViewData["Title"] = "Customer Login";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="card-header bg-brown text-white text-center py-4 border-0">
+                    <h3 class="fw-bold mb-0">Welcome Back</h3>
+                    <p class="small opacity-75 mb-0">Please enter your details to login</p>
+                </div>
+                <div class="card-body p-5 bg-white">
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger px-3 py-2 small mb-4 border-0 rounded-3">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i> @ViewBag.Error
+                        </div>
+                    }
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success px-3 py-2 small mb-4 border-0 rounded-3">
+                            <i class="bi bi-check-circle-fill me-2"></i> @TempData["Success"]
+                        </div>
+                    }
+
+                    <form asp-action="Login" method="post">
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-muted">Email Address</label>
+                            <input type="email" name="email" class="form-control form-control-lg bg-light border-0 rounded-3" placeholder="customer@gmail.com" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-muted">Password</label>
+                            <input type="password" name="password" class="form-control form-control-lg bg-light border-0 rounded-3" placeholder="••••••••" required>
+                        </div>
+                        <div class="d-grid mb-4">
+                            <button type="submit" class="btn btn-brown btn-lg rounded-3 fw-bold py-3 shadow-sm">Sign In</button>
+                        </div>
+                        <p class="text-center text-muted small mb-0">
+                            Don't have an account? <a asp-action="Signup" class="text-brown fw-bold text-decoration-none border-bottom border-brown">Create one here</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-brown { background-color: #8b4513 !important; }
+    .text-brown { color: #8b4513 !important; }
+    .border-brown { border-bottom: 2px solid #8b4513 !important; }
+    .btn-brown { background-color: #8b4513; color: white; border: none; transition: 0.3s; }
+    .btn-brown:hover { background-color: #70360f; color: white; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(139, 69, 19, 0.2); }
+</style>

@@ -1,0 +1,68 @@
+@{
+    ViewData["Title"] = "Add Product";
+    Layout = "_Dashboard";
+}
+
+<div class="container-fluid px-4 py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index")">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("fetchProduct")">Products</a></li>
+                    <li class="breadcrumb-item active">Add New</li>
+                </ol>
+            </nav>
+
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-header bg-white border-0 py-3">
+                    <h4 class="fw-bold text-dark mb-0">Add New Product</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="addProduct" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label text-muted small fw-bold text-uppercase">Product Name</label>
+                                <input type="text" name="Prod_name" class="form-control rounded-3 border-light bg-light" placeholder="Enter Product Name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label text-muted small fw-bold text-uppercase">Price ($)</label>
+                                <input type="number" name="Prod_price" class="form-control rounded-3 border-light bg-light" placeholder="0.00" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold text-uppercase">Description</label>
+                            <textarea name="Prod_description" class="form-control rounded-3 border-light bg-light" rows="3" placeholder="Describe your product..." required></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label text-muted small fw-bold text-uppercase">Category</label>
+                                @Html.Partial("CategoryDropdown",ViewData["category"])
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label text-muted small fw-bold text-uppercase">Product Image</label>
+                                <input type="file" name="Prod_image" class="form-control rounded-3 border-light bg-light" required>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-brown btn-lg rounded-3 fw-bold py-3 shadow-sm">
+                                <i class="fas fa-plus-circle me-2"></i>Create Product
+                            </button>
+                            <a href="@Url.Action("fetchProduct")" class="btn btn-link text-muted text-decoration-none">Cancel and Return</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .breadcrumb-item a { text-decoration: none; color: #6c757d; }
+    .breadcrumb-item.active { color: #8b4513; font-weight: 500; }
+    .form-control:focus { background-color: #fff; border-color: #8b4513; box-shadow: 0 0 0 4px rgba(139, 69, 19, 0.1); }
+    select.form-control { -webkit-appearance: listbox !important; }
+</style>

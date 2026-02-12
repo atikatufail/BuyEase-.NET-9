@@ -1,0 +1,77 @@
+@model Ecommerce.Models.TblCustomer
+@{
+    ViewData["Title"] = "Customer Signup";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="card-header bg-brown text-white text-center py-4 border-0">
+                    <h3 class="fw-bold mb-0">Join BuyEase</h3>
+                    <p class="small opacity-75 mb-0">Create your account to start shopping</p>
+                </div>
+                <div class="card-body p-5 bg-white">
+                    <form asp-action="Signup" method="post" enctype="multipart/form-data">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-muted">Full Name</label>
+                                <input asp-for="Cust_name" class="form-control bg-light border-0 rounded-3" placeholder="John Doe" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-muted">Email Address</label>
+                                <input asp-for="Cust_email" type="email" class="form-control bg-light border-0 rounded-3" placeholder="customer@gmail.com" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-muted">Password</label>
+                                <input asp-for="Cust_password" type="password" class="form-control bg-light border-0 rounded-3" placeholder="••••••••" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-muted">Phone Number</label>
+                                <input asp-for="Cust_phone" class="form-control bg-light border-0 rounded-3" placeholder="+123456789" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label small fw-bold text-muted">Address</label>
+                                <input asp-for="Cust_address" class="form-control bg-light border-0 rounded-3" placeholder="Your full address" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-bold text-muted">Country</label>
+                                <input asp-for="Cust_country" class="form-control bg-light border-0 rounded-3" placeholder="USA" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-bold text-muted">City</label>
+                                <input asp-for="Cust_city" class="form-control bg-light border-0 rounded-3" placeholder="New York" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-bold text-muted">Gender</label>
+                                <select asp-for="Cust_gender" class="form-select bg-light border-0 rounded-3">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label small fw-bold text-muted">Profile Image</label>
+                                <input type="file" name="file" class="form-control bg-light border-0 rounded-3">
+                            </div>
+                        </div>
+                        <div class="d-grid mt-5">
+                            <button type="submit" class="btn btn-brown btn-lg rounded-3 fw-bold py-3 shadow-sm">Create Account</button>
+                        </div>
+                        <p class="text-center text-muted small mt-4 mb-0">
+                            Already have an account? <a asp-action="Login" class="text-brown fw-bold text-decoration-none border-bottom border-brown">Sign in instead</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-brown { background-color: #8b4513 !important; }
+    .text-brown { color: #8b4513 !important; }
+    .border-brown { border-bottom: 2px solid #8b4513 !important; }
+    .btn-brown { background-color: #8b4513; color: white; border: none; transition: 0.3s; }
+    .btn-brown:hover { background-color: #70360f; color: white; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(139, 69, 19, 0.2); }
+</style>

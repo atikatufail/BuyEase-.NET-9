@@ -1,0 +1,85 @@
+@model List<TblCustomer>
+
+@{
+    ViewData["Title"] = "Customers";
+    Layout = "_Dashboard";
+}
+
+<div class="container-fluid px-4 py-4">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-1">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index")">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Customers</li>
+                </ol>
+            </nav>
+            <h2 class="fw-bold mb-0">All Customers</h2>
+        </div>
+        <span class="badge bg-primary rounded-pill px-3 py-2">@Model.Count() Customers</span>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-4 py-3 text-uppercase small fw-bold text-muted">Customer</th>
+                            <th class="py-3 text-uppercase small fw-bold text-muted">Contact</th>
+                            <th class="py-3 text-uppercase small fw-bold text-muted text-center">Location</th>
+                            <th class="py-3 text-uppercase small fw-bold text-muted text-center">Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var cust in Model)
+                        {
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-light rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                                            @if (!string.IsNullOrEmpty(cust.Cust_image))
+                                            {
+                                                <img src="~/customer_image/@cust.Cust_image" class="rounded-circle" width="45" height="45" style="object-fit: cover;">
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-user text-muted"></i>
+                                            }
+                                        </div>
+                                        <div>
+                                            <div class="fw-bold text-dark">@cust.Cust_name</div>
+                                            <div class="small text-muted">@cust.Cust_email</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="text-dark fw-medium">@cust.Cust_phone</div>
+                                    <div class="small text-muted">Phone</div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="text-dark">@cust.Cust_city, @cust.Cust_country</div>
+                                    <div class="small text-muted">@cust.Cust_address</div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group shadow-sm rounded-pill overflow-hidden">
+                                        <a href="@Url.Action("customerDetails","Admin",new{id=@cust.Cust_id})" class="btn btn-sm btn-white border-end" title="Details"><i class="fas fa-eye text-primary"></i></a>
+                                        <a href="@Url.Action("updateCustomer","Admin",new{id=@cust.Cust_id})" class="btn btn-sm btn-white border-end" title="Update"><i class="fas fa-edit text-warning"></i></a>
+                                        <a href="@Url.Action("deletePermission","Admin",new{id=@cust.Cust_id})" class="btn btn-sm btn-white" title="Delete"><i class="fas fa-trash text-danger"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-white { background: white; border: none; }
+    .btn-white:hover { background: #f8f9fa; }
+    .table > :not(caption) > * > * { border-bottom-color: #f1f1f1; }
+    .table tbody tr:last-child > td { border-bottom: none; }
+</style>

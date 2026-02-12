@@ -1,0 +1,38 @@
+@model List<TblCategory>
+@{
+    ViewData["Title"] = "Shop by Category";
+}
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">Explore Categories</h1>
+        <p class="text-muted">Discover our wide range of premium collections</p>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var cat in Model)
+        {
+            <div class="col-md-4 col-sm-6">
+                <a asp-action="Shop" asp-route-categoryId="@cat.Category_id" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm h-100 category-card overflow-hidden">
+                        <div class="card-body p-5 text-center bg-light">
+                            <i class="bi bi-tag fs-1 text-primary mb-3"></i>
+                            <h3 class="h4 text-dark mb-0">@cat.Category_name</h3>
+                            <p class="text-muted small mt-2">Explore the collection</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .category-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+</style>

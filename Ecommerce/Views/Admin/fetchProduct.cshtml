@@ -1,0 +1,78 @@
+@model List<TblProduct>
+
+@{
+    ViewData["Title"] = "Products";
+    Layout = "_Dashboard";
+}
+
+<div class="container-fluid px-4 py-4">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-1">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index")">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Products</li>
+                </ol>
+            </nav>
+            <h2 class="fw-bold mb-0">All Products</h2>
+        </div>
+        <a href="@Url.Action("addProduct", "Admin")" class="btn btn-brown rounded-pill px-4 shadow-sm">
+            <i class="fas fa-plus me-2"></i> Add New Product
+        </a>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-4 py-3 text-uppercase small fw-bold text-muted">Product</th>
+                            <th class="py-3 text-uppercase small fw-bold text-muted">Category</th>
+                            <th class="py-3 text-uppercase small fw-bold text-muted text-end">Price</th>
+                            <th class="py-3 text-uppercase small fw-bold text-muted text-center">Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var prod in Model)
+                        {
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-light rounded-3 p-1 me-3">
+                                            <img src="~/product_image/@prod.Prod_image" class="rounded-2" width="45" height="45" style="object-fit: contain;">
+                                        </div>
+                                        <div>
+                                            <div class="fw-bold text-dark">@prod.Prod_name</div>
+                                            <div class="small text-muted">ID: #@prod.Prod_id</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-light text-muted border rounded-pill px-3">@prod.Category?.Category_name</span>
+                                </td>
+                                <td class="text-end fw-bold text-dark pe-4">$@prod.Prod_price</td>
+                                <td class="text-center">
+                                    <div class="btn-group shadow-sm rounded-pill overflow-hidden">
+                                        <a href="@Url.Action("productDetails","Admin", new { id = @prod.Prod_id })" class="btn btn-sm btn-white border-end" title="Details"><i class="fas fa-eye text-brown"></i></a>
+                                        <a href="@Url.Action("updateProduct","Admin", new { id = @prod.Prod_id })" class="btn btn-sm btn-white border-end" title="Update"><i class="fas fa-edit text-warning"></i></a>
+                                        <a href="@Url.Action("deletePermissionProduct","Admin", new { id = @prod.Prod_id })" class="btn btn-sm btn-white" title="Delete"><i class="fas fa-trash text-danger"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-white { background: white; border: none; }
+    .btn-white:hover { background: #f8f9fa; }
+    .table > :not(caption) > * > * { border-bottom-color: #f1f1f1; }
+    .table tbody tr:last-child > td { border-bottom: none; }
+    .breadcrumb-item a { text-decoration: none; color: #6c757d; }
+    .breadcrumb-item.active { color: #8b4513; font-weight: 500; }
+</style>
