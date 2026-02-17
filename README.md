@@ -45,7 +45,7 @@ This project includes:
 **Admin**
 Route: `/Admin/Login`
 Email: `admin@gmail.com`
-Password: `admin123`
+Password: `123`
 
 **Customer**
 Register using the Sign Up feature.
