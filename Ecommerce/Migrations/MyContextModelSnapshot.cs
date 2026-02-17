@@ -72,6 +72,10 @@ namespace Ecommerce.Migrations
 
                     b.HasKey("Cart_id");
 
+                    b.HasIndex("Cust_id");
+
+                    b.HasIndex("Prod_id");
+
                     b.ToTable("tbl_cart");
                 });
 
@@ -206,14 +210,33 @@ namespace Ecommerce.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Prod_price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Prod_price")
+                        .HasColumnType("int");
 
                     b.HasKey("Prod_id");
 
                     b.HasIndex("Cat_id");
 
                     b.ToTable("tbl_product");
+                });
+
+            modelBuilder.Entity("Ecommerce.Models.TblCart", b =>
+                {
+                    b.HasOne("Ecommerce.Models.TblCustomer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("Cust_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce.Models.TblProduct", "Product")
+                        .WithMany()
+                        .HasForeignKey("Prod_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Ecommerce.Models.TblProduct", b =>
